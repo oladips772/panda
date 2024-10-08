@@ -2,8 +2,6 @@
 import React from "react";
 import BottomTab from "../components/BottomTab";
 import { LuCopy } from "react-icons/lu";
-// import { LuBadgeCheck } from "react-icons/lu";
-// import { TbRosetteDiscountCheckFilled } from "react-icons/tb";
 import { BsPatchCheckFill } from "react-icons/bs";
 
 function Profile() {
@@ -30,15 +28,34 @@ function Profile() {
       </p>
 
       {/* frens */}
-      <div className="mt-3">
+      <div className="mt-4">
+        <p className="text-[18px] text-gray-200 mb-2 mx-2">Your friends</p>
         {/* frens item */}
-        <div className="flex items-center">
-          <div className="flex items-center justify-center h-[37px] w-[37px] bg-purple-700 rounded-full mx-1">
+        <div className="flex items-center my-[10px]">
+          <div className="flex items-center justify-center h-[35px] w-[35px] bg-purple-700 rounded-full mx-1">
             <p className="text-gray-200 font-[600] text-[20px]">K</p>
           </div>
-          <span className="text-gray-200">Kyenret Kutwal</span>
+          <span className="text-gray-200 ml-2 text-lg flex-1">
+            Kyenret Kutwal
+          </span>
+          <span className="text-gray-200">300728</span>
+        </div>
+        <div className="flex items-center my-[10px]">
+          <div className="flex items-center justify-center h-[35px] w-[35px] bg-purple-700 rounded-full mx-1">
+            <p className="text-gray-200 font-[600] text-[20px]">M</p>
+          </div>
+          <span className="text-gray-200 ml-2 text-lg flex-1">
+            Maryam Alausa
+          </span>
+          <span className="text-gray-200">70112</span>
         </div>
       </div>
+      {/* referral button */}
+      <button className="mt-8 text-gray-200 flex flex-row items-center justify-center bg-purple-800 rounded p-3 w-full">
+        Copy Referral Link
+        <LuCopy className="ml-2 font-[600] text-gray-200" size={19} />
+      </button>
+      <p className="text-gray-300 mt-1 text-sm">Invite a friend to earn 1,000 panda tokens</p>
       <BottomTab />
     </div>
   );
