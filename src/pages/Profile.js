@@ -35,7 +35,7 @@ function Profile() {
           <div className="flex items-center justify-center h-[35px] w-[35px] bg-purple-700 rounded-full mx-1">
             <p className="text-gray-200 font-[600] text-[18px]">K</p>
           </div>
-          <span className="text-gray-200 ml-2 text-[17px] flex-1">
+          <span className="text-gray-200 ml-2 text-[16px] flex-1">
             Kyenret Kutwal
           </span>
           <span className="text-gray-200">300728</span>
@@ -44,7 +44,7 @@ function Profile() {
           <div className="flex items-center justify-center h-[35px] w-[35px] bg-purple-700 rounded-full mx-1">
             <p className="text-gray-200 font-[600] text-[18px]">K</p>
           </div>
-          <span className="text-gray-200 ml-2 text-[17px] flex-1">
+          <span className="text-gray-200 ml-2 text-[16px] flex-1">
             Kyenret Kutwal
           </span>
           <span className="text-gray-200">300728</span>
