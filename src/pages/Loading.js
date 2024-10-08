@@ -1,8 +1,19 @@
 /** @format */
-import React from "react";
+import React, { useEffect } from "react";
 import logo from "../images/Designer.jpeg";
+import { useNavigate } from "react-router-dom";
 
 function Loading() {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      navigate("/home");
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, [navigate]);
+
   return (
     <div className="relative">
       <img src={logo} className="h-full w-full object-cover" alt="" />
@@ -13,7 +24,9 @@ function Loading() {
         <p className="text-white text-[12px] text-center">
           Build your coin balance and brace up for upcoming airdrop.
         </p>
-        <p className="text-white text-center absolute bottom-6 left-[42%] animate-pulse">loading...</p>
+        <p className="text-white text-center absolute bottom-6 left-[42%] animate-pulse">
+          loading...
+        </p>
       </div>
     </div>
   );

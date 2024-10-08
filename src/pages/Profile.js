@@ -13,15 +13,15 @@ function Profile() {
           <h1 className="font-[600] text-[13px]">Panda User ID:</h1>
           <div className="flex items-center">
             <span className="font-[500]">#jhd867k</span>
-            <LuCopy className="ml-2 font-[600] text-purple-600" size={19} />
+            <LuCopy className="ml-2 font-[600] text-purple-500" size={19} />
           </div>
         </div>
       </div>
       {/* influencer badge */}
 
-      <div className="flex items-center justify-center my-2 space-x-2 -mb-[2px]">
+      <div className="flex items-center justify-center my-2 space-x-1 -mb-[2px]">
         <h1 className="text-gray-200 font-[600] text-lg">Influencer</h1>
-        <BsPatchCheckFill className="text-purple-600" size={18} />
+        <BsPatchCheckFill className="text-purple-500" size={17} />
       </div>
       <p className="text-gray-300 text-center text-[12px]">
         You have earned the influencer badge

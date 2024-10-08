@@ -1,9 +1,21 @@
 /** @format */
-import React from "react";
+import { useEffect } from "react";
 import BottomTab from "../components/BottomTab";
 import { LuCopy } from "react-icons/lu";
+import { useSelector, useDispatch } from "react-redux";
+import { GetTasks } from "../redux/actions/TaskAction";
+import { ScaleLoader } from "react-spinners";
+import Task from "../components/Task";
+import { useNavigate } from "react-router-dom";
 
 function Earn() {
+  const dispatch = useDispatch();
+  const { loading, tasks } = useSelector((state) => state.fetchTasks);
+
+  useEffect(() => {
+    dispatch(GetTasks());
+  }, [dispatch]);
+
   return (
     <div className="">
       <div className="p-3 h-[80vh]">
@@ -26,53 +38,18 @@ function Earn() {
         </p>
         <h1 className="text-gray-100 text-lg mt-6 font-[600]">Tasks</h1>
         {/* tasks div */}
-        <div className="bg-[#1b172b] p-1 rounded mt-2">
-          {/* task item */}
-          <div className="my-3 flex flex-row items-center justify-between border-b border-gray-700 pb-[10px]">
-            <div>
-              <h1 className="text-[14px] text-gray-100 font-[500]">
-                Subscribe To Our Telegram Channel
-              </h1>
-              <p className="text-gray-400 text-[11.5px]">+ 5000 tokens</p>
-            </div>
-            <button className="p-[6px] rounded-[20px] text-white bg-purple-800 w-[75px] text-[13.5px]">
-              Start
-            </button>
+        {loading ? (
+          <div className="flex items-center justify-center mt-6">
+            <ScaleLoader height={25} color="#a855f7" />
           </div>
-          <div className="my-3 flex flex-row items-center justify-between border-b border-gray-700 pb-[10px]">
-            <div>
-              <h1 className="text-[14px] text-gray-100 font-[500]">
-                Subscribe To Our Youtube Channel
-              </h1>
-              <p className="text-gray-400 text-[11.5px]">+ 5000 tokens</p>
-            </div>
-            <button className="p-[6px] rounded-[20px] text-white bg-purple-800 w-[75px] text-[13.5px]">
-              Start
-            </button>
+        ) : (
+          <div className="bg-[#1b172b] p-2 rounded mt-2">
+            {/* task item */}
+            {tasks?.map((task, index) => (
+              <Task task={task} key={index}/>
+            ))}
           </div>
-          <div className="my-3 flex flex-row items-center justify-between border-b border-gray-700 pb-[10px]">
-            <div>
-              <h1 className="text-[14px] text-gray-100 font-[500]">
-                Follow Our X (Twitter) Account
-              </h1>
-              <p className="text-gray-400 text-[11.5px]">+ 5000 tokens</p>
-            </div>
-            <button className="p-[6px] rounded-[20px] text-white bg-purple-800 w-[75px] text-[13.5px]">
-              Start
-            </button>
-          </div>
-          <div className="my-3 flex flex-row items-center justify-between border-b border-gray-700 pb-[10px]">
-            <div>
-              <h1 className="text-[14px] text-gray-100 font-[500]">
-                Watch youtube video
-              </h1>
-              <p className="text-gray-400 text-[11.5px]">+ 2000 tokens</p>
-            </div>
-            <button className="p-[6px] rounded-[20px] text-white bg-purple-800 w-[75px] text-[13.5px]">
-              Start
-            </button>
-          </div>
-        </div>
+        )}
       </div>
 
       <BottomTab />
