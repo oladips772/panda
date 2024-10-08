@@ -16,7 +16,7 @@ function Earn() {
           </div>
         </div>
         {/* header */}
-        <h1 className="text-gray-200 mt-3 font-[500] text-[15px]">
+        <h1 className="text-gray-100 mt-3 font-[500] text-[15px]">
           Complete Tasks to earn more panda tokens.
         </h1>
         <p className="text-gray-400 text-[12px]">
@@ -24,18 +24,16 @@ function Earn() {
           <span className="text-gray-300 font-[500]">airdrop</span>{" "}
           qualification.
         </p>
-        <h1 className="text-gray-200 text-lg mt-6 font-[600]">Tasks</h1>
+        <h1 className="text-gray-100 text-lg mt-6 font-[600]">Tasks</h1>
         {/* tasks div */}
-        <div className="bg-[#1b172b] p-2 rounded mt-2">
+        <div className="bg-[#1b172b] p-1 rounded mt-2">
           {/* task item */}
           <div className="my-3 flex flex-row items-center justify-between border-b border-gray-700 pb-[10px]">
             <div>
-              <h1 className="text-[14px] text-gray-200 font-[500]">
+              <h1 className="text-[14px] text-gray-100 font-[500]">
                 Subscribe To Our Telegram Channel
               </h1>
-              <p className="text-gray-400 text-[11.5px]">
-                Join our telegram channel to get 5000 tokens
-              </p>
+              <p className="text-gray-400 text-[11.5px]">+ 5000 tokens</p>
             </div>
             <button className="p-[6px] rounded-[20px] text-white bg-purple-800 w-[75px] text-[13.5px]">
               Start
@@ -43,12 +41,10 @@ function Earn() {
           </div>
           <div className="my-3 flex flex-row items-center justify-between border-b border-gray-700 pb-[10px]">
             <div>
-              <h1 className="text-[14px] text-gray-200 font-[500]">
-                Join To Our Youtube Channel
+              <h1 className="text-[14px] text-gray-100 font-[500]">
+                Subscribe To Our Youtube Channel
               </h1>
-              <p className="text-gray-400 text-[11.5px]">
-                Join our youtube channel to get 5000 tokens
-              </p>
+              <p className="text-gray-400 text-[11.5px]">+ 5000 tokens</p>
             </div>
             <button className="p-[6px] rounded-[20px] text-white bg-purple-800 w-[75px] text-[13.5px]">
               Start
@@ -56,12 +52,10 @@ function Earn() {
           </div>
           <div className="my-3 flex flex-row items-center justify-between border-b border-gray-700 pb-[10px]">
             <div>
-              <h1 className="text-[14px] text-gray-200 font-[500]">
+              <h1 className="text-[14px] text-gray-100 font-[500]">
                 Follow Our X (Twitter) Account
               </h1>
-              <p className="text-gray-400 text-[11.5px]">
-                Subscribe to our x account to get 5000 tokens
-              </p>
+              <p className="text-gray-400 text-[11.5px]">+ 5000 tokens</p>
             </div>
             <button className="p-[6px] rounded-[20px] text-white bg-purple-800 w-[75px] text-[13.5px]">
               Start
@@ -69,12 +63,10 @@ function Earn() {
           </div>
           <div className="my-3 flex flex-row items-center justify-between border-b border-gray-700 pb-[10px]">
             <div>
-              <h1 className="text-[14px] text-gray-200 font-[500]">
+              <h1 className="text-[14px] text-gray-100 font-[500]">
                 Watch youtube video
               </h1>
-              <p className="text-gray-400 text-[11.5px]">
-                Watch youtube video to get 2000 tokens
-              </p>
+              <p className="text-gray-400 text-[11.5px]">+ 2000 tokens</p>
             </div>
             <button className="p-[6px] rounded-[20px] text-white bg-purple-800 w-[75px] text-[13.5px]">
               Start

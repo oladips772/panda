@@ -9,7 +9,7 @@ import { TbAirBalloon } from "react-icons/tb";
 
 function BottomTab() {
   return (
-    <div className="h-[60px] p-2 border-t border-gray-600 flex items-center justify-around bg-[#1b172b] fixed bottom-0 w-full max-w-[600px]">
+    <div className="h-[57px] p-2 border-t border-gray-600 flex items-center justify-around bg-[#1b172b] fixed bottom-0 w-full max-w-[600px]">
       <NavLink
         to={"/home"}
         className={"flex flex-col items-center"}
@@ -19,8 +19,8 @@ function BottomTab() {
           };
         }}
       >
-        <RiHome3Fill size={24} />
-        <p className="text-[12.5px]">Home</p>
+        <RiHome3Fill size={23} />
+        <p className="text-[12px]">Home</p>
       </NavLink>
       <NavLink
         to={"/earn"}
@@ -31,22 +31,10 @@ function BottomTab() {
         }}
         className={"flex flex-col items-center space-y-1 relative"}
       >
-        <span className="h-[7px] w-[7px] rounded-full bg-red-500 -right-2 absolute"></span>
-        <FaCoins size={21} />
-        <p className="text-[12.5px]">Earn</p>
+        <span className="h-[7px] w-[7px] rounded-full bg-pink-600 -right-2 absolute"></span>
+        <FaCoins size={20} className="-mb-2" />
+        <p className="text-[12px]">Earn</p>
       </NavLink>
-      {/* <NavLink
-        to={"/influencers"}
-        style={({ isActive }) => {
-          return {
-            color: isActive ? "white" : " grey",
-          };
-        }}
-        className={"flex flex-col items-center space-y-1"}
-      >
-        <FaUsersCog size={28} className="-mb-1 -mt-1" />
-        <p className="text-[12.5px]">Influencers</p>
-      </NavLink> */}
       <NavLink
         style={({ isActive }) => {
           return {
@@ -56,8 +44,8 @@ function BottomTab() {
         to={"/profile"}
         className={"flex flex-col items-center space-y-1"}
       >
-        <FaUser size={21} />
-        <p className="text-[12.5px]">Profile</p>
+        <FaUser size={20} />
+        <p className="text-[12px]">Profile</p>
       </NavLink>
       <NavLink
         style={({ isActive }) => {
@@ -68,8 +56,8 @@ function BottomTab() {
         to={"/airdrop"}
         className={"flex flex-col items-center space-y-1"}
       >
-        <TbAirBalloon size={28} className="-mt-1 -mb-1" />
-        <p className="text-[12.5px]">Airdrop</p>
+        <TbAirBalloon size={27} className="-mt-1 -mb-1" />
+        <p className="text-[12px]">Airdrop</p>
       </NavLink>
     </div>
   );
