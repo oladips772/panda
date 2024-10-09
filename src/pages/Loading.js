@@ -30,14 +30,15 @@ function Loading() {
 
           console.log("Decoded tgWebAppData:", decodedData); // Log the decoded data
 
-          // Extract the 'user' object from the decoded data
-          const userMatch = decodedData.match(/user%3D(.+?)%26/);
-          if (userMatch && userMatch[1]) {
-            const userDataString = decodeURIComponent(userMatch[1]);
-            const userData = JSON.parse(userDataString);
-            console.log("Extracted user data:", userData); // Log user data
-            return { userData, searchParams };
-          }
+          // Use URLSearchParams again on the decoded string to extract individual parameters
+          const decodedParams = new URLSearchParams(decodedData);
+
+          // Extract the 'user' object from the decodedParams
+          const userString = decodedParams.get("user");
+          const userData = userString ? JSON.parse(userString) : null;
+
+          console.log("Extracted user data:", userData); // Log user data
+          return { userData, searchParams };
         }
       } catch (error) {
         console.error("Error parsing Telegram WebApp data:", error);
@@ -61,10 +62,10 @@ function Loading() {
   useEffect(() => {
     const handleUserAccount = async () => {
       try {
-        if (!userData?.id || !startParam) {
-          console.log("Missing user data or referral code.");
-          return;
-        }
+        // if (!userData?.id || !startParam) {
+        //   console.log("Missing user data or referral code.");
+        //   return;
+        // }
 
         // Send user data and referral code to the backend
         const response = await axios.post(
@@ -89,7 +90,7 @@ function Loading() {
     };
 
     // Execute only if both user data and referral code are available
-    if (userData && startParam) {
+    if (userData || startParam) {
       handleUserAccount();
     }
   }, [startParam, userData, navigate]);
