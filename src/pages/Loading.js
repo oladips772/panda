@@ -13,40 +13,49 @@ function Loading() {
   const query = new URLSearchParams(window.location.search);
   const startParam = query.get("tgWebAppStartParam");
 
+  // Function to parse tgWebAppData from URL
+  const parseTGWebAppData = (tgWebAppData) => {
+    try {
+      const decodedData = decodeURIComponent(tgWebAppData);
+      const data = decodedData.match(/user=({.*?})/);
+      if (data && data[1]) {
+        return JSON.parse(decodeURIComponent(data[1]));
+      }
+      return null;
+    } catch (error) {
+      console.error("Failed to parse tgWebAppData:", error);
+      return null;
+    }
+  };
+
+  // Fallback if startParam is unavailable
+  const tgWebAppData = query.get("tgWebAppData");
+  const userData = tgWebAppData ? parseTGWebAppData(tgWebAppData) : null;
+
   useEffect(() => {
     const getUserProfile = async () => {
-      if (!startParam) {
-        console.error("No start_param available.");
-        return;
-      }
-
       try {
-        // Fetch the user profile using the start_param
+        const userId = startParam || userData?.id;
+        if (!userId) {
+          console.log("No user information found");
+          return;
+        }
+
+        // Fetch user profile using the userId (startParam or tgWebAppData)
         const { data } = await axios.get(
-          `https://panda-backend-b67c.onrender.com/api/users/profile/${startParam}`
+          `https://panda-backend-b67c.onrender.com/api/users/profile/${userId}`
         );
-        console.log(data);
+        console.log("User profile:", data);
 
-        // Store the user data in localStorage
         localStorage.setItem("userInfo", JSON.stringify(data));
-
-        // Navigate to home after fetching the user profile
         navigate("/home");
       } catch (error) {
-        console.error("Error fetching user profile:", error);
+        console.log("Error fetching user profile:", error);
       }
     };
 
     getUserProfile();
-  }, [navigate, startParam]);
-
-  // useEffect(() => {
-  //   const timer = setTimeout(() => {
-  //     navigate("/home");
-  //   }, 4000);
-
-  //   return () => clearTimeout(timer);
-  // }, [navigate]);
+  }, [startParam, userData, navigate]);
 
   return (
     <div className="relative">
