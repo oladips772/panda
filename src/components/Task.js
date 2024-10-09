@@ -1,10 +1,8 @@
 /** @format */
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function Task({ task }) {
-  const navigate = useNavigate();
-
   return (
     <div className="my-3 flex flex-row items-center justify-between border-b border-gray-700 pb-[10px]">
       <div>

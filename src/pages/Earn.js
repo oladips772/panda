@@ -6,7 +6,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { GetTasks } from "../redux/actions/TaskAction";
 import { ScaleLoader } from "react-spinners";
 import Task from "../components/Task";
-import { useNavigate } from "react-router-dom";
 
 function Earn() {
   const dispatch = useDispatch();
@@ -46,7 +45,7 @@ function Earn() {
           <div className="bg-[#1b172b] p-2 rounded mt-2">
             {/* task item */}
             {tasks?.map((task, index) => (
-              <Task task={task} key={index}/>
+              <Task task={task} key={index} />
             ))}
           </div>
         )}
