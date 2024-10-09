@@ -38,22 +38,27 @@ function Loading() {
           const userData = userString ? JSON.parse(userString) : null;
 
           console.log("Extracted user data:", userData); // Log user data
-          return { userData, searchParams };
+          return userData;
         }
       } catch (error) {
         console.error("Error parsing Telegram WebApp data:", error);
       }
     }
-    return { userData: null, searchParams: null };
+    return null;
   };
 
-  // Extract user data and searchParams from the hash
-  const { userData, searchParams } = parseTelegramDataFromHash();
+  // Function to parse the start_param from the location.search
+  const getStartParamFromSearch = () => {
+    const search = location.search; // Get the URL query parameters (after ?)
+    const searchParams = new URLSearchParams(search);
+    const startParam = searchParams.get("tgWebAppStartParam");
+    console.log("Extracted start_param from search:", startParam);
+    return startParam;
+  };
 
-  // Extract referral code (start_param) from Telegram WebApp or URL hash
-  const startParam =
-    searchParams?.get("startapp") ||
-    window?.Telegram?.WebApp?.initDataUnsafe?.start_param;
+  // Extract user data from the hash and start_param from search
+  const userData = parseTelegramDataFromHash();
+  const startParam = getStartParamFromSearch();
 
   // Debugging logs to ensure correct extraction
   console.log("startParam (referral code):", startParam); // Log the referral code
@@ -62,18 +67,13 @@ function Loading() {
   useEffect(() => {
     const handleUserAccount = async () => {
       try {
-        // if (!userData?.id || !startParam) {
-        //   console.log("Missing user data or referral code.");
-        //   return;
-        // }
-
         // Send user data and referral code to the backend
         const response = await axios.post(
           "https://panda-backend-b67c.onrender.com/api/users/check-or-create",
           {
-            userId: userData.id,
-            firstName: userData.first_name,
-            lastName: userData.last_name,
+            userId: userData?.id,
+            firstName: userData?.first_name,
+            lastName: userData?.last_name,
             referralCode: startParam,
           }
         );
