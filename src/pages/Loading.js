@@ -10,11 +10,15 @@ function Loading() {
   const pandaId = query.get("pandaId");
   console.log(pandaId);
 
+  window.Telegram.WebApp.init();
+
+  const startParam = window.Telegram.WebApp.initDataUnsafe.start_param;
+
   useEffect(() => {
     const getUserProfile = async () => {
       try {
         const { data } = await axios.get(
-          `https://panda-backend-b67c.onrender.com/api/users/profile/${pandaId}`
+          `https://panda-backend-b67c.onrender.com/api/users/profile/${startParam}`
         );
         console.log(data);
         localStorage.setItem("userInfo", JSON.stringify(data));
@@ -25,7 +29,7 @@ function Loading() {
     };
 
     getUserProfile();
-  }, [pandaId]);
+  }, [pandaId, navigate]);
 
   // useEffect(() => {
   //   const timer = setTimeout(() => {
