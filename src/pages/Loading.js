@@ -6,30 +6,39 @@ import axios from "axios";
 
 function Loading() {
   const navigate = useNavigate();
-  const query = new URLSearchParams(useLocation().search);
-  const pandaId = query.get("pandaId");
-  console.log(pandaId);
-
+  // Initialize the Telegram Web App
   window?.Telegram?.WebApp.init();
 
-  const startParam = window?.Telegram?.WebApp?.initDataUnsafe?.start_param;
+  // Extract tgWebAppStartParam from URL
+  const query = new URLSearchParams(window.location.search);
+  const startParam = query.get("tgWebAppStartParam");
 
   useEffect(() => {
     const getUserProfile = async () => {
+      if (!startParam) {
+        console.error("No start_param available.");
+        return;
+      }
+
       try {
+        // Fetch the user profile using the start_param
         const { data } = await axios.get(
           `https://panda-backend-b67c.onrender.com/api/users/profile/${startParam}`
         );
         console.log(data);
+
+        // Store the user data in localStorage
         localStorage.setItem("userInfo", JSON.stringify(data));
+
+        // Navigate to home after fetching the user profile
         navigate("/home");
       } catch (error) {
-        console.log(error);
+        console.error("Error fetching user profile:", error);
       }
     };
 
     getUserProfile();
-  }, [pandaId, navigate]);
+  }, [navigate, startParam]);
 
   // useEffect(() => {
   //   const timer = setTimeout(() => {
