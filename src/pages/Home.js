@@ -2,9 +2,10 @@
 import React from "react";
 import BottomTab from "../components/BottomTab";
 import { LuCopy } from "react-icons/lu";
-import panda1 from "../images/panda1.png"
+import panda1 from "../images/panda1.png";
 
 function Home() {
+  const userInfo = JSON.parse(localStorage.getItem("userInfo"));
   return (
     <div>
       <div className="p-3 h-[80vh] bg-[#0e0c16e0]">
@@ -12,7 +13,7 @@ function Home() {
         <div className="flex items-center text-white bg-[#1b172b] p-[10px] rounded justify-between">
           <h1 className="font-[600] text-[13px]">Panda User ID:</h1>
           <div className="flex items-center">
-            <span className="font-[500]">#jhd867k</span>
+            <span className="font-[500]">#{userInfo?.pandaId}</span>
             <LuCopy className="ml-2 font-[600] text-purple-600" size={19} />
           </div>
         </div>
@@ -21,11 +22,17 @@ function Home() {
           <h1 className="text-[47px] text-purple-500 font-[700]">5,922</h1>
         </div>
         <div>
-          <img src={panda1} alt="" className="h-[280px] object-contain mx-auto" />
+          <img
+            src={panda1}
+            alt=""
+            className="h-[280px] object-contain mx-auto"
+          />
         </div>
         {/* claim button */}
         <div className="flex items-center justify-center mx-2 h-[30%]">
-          <button className="h-[50px] w-full bg-purple-800 text-[17px] text-gray-100 font-[500] rounded-lg">Claim 3000</button>
+          <button className="h-[50px] w-full bg-purple-800 text-[17px] text-gray-100 font-[500] rounded-lg">
+            Claim 3000
+          </button>
         </div>
       </div>
       <BottomTab />

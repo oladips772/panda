@@ -1,18 +1,39 @@
 /** @format */
 import React, { useEffect } from "react";
 import logo from "../images/Designer.jpeg";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function Loading() {
   const navigate = useNavigate();
+  const query = new URLSearchParams(useLocation().search);
+  const pandaId = query.get("pandaId");
+  console.log(pandaId);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      navigate("/home");
-    }, 2000);
+    const getUserProfile = async () => {
+      try {
+        const { data } = await axios.get(
+          `https://panda-backend-b67c.onrender.com/api/users/profile/${pandaId}`
+        );
+        console.log(data);
+        localStorage.setItem("userInfo", JSON.stringify(data));
+        navigate("/home");
+      } catch (error) {
+        console.log(error);
+      }
+    };
 
-    return () => clearTimeout(timer);
-  }, [navigate]);
+    getUserProfile();
+  }, [pandaId]);
+
+  // useEffect(() => {
+  //   const timer = setTimeout(() => {
+  //     navigate("/home");
+  //   }, 4000);
+
+  //   return () => clearTimeout(timer);
+  // }, [navigate]);
 
   return (
     <div className="relative">
