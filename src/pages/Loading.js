@@ -10,9 +10,9 @@ function Loading() {
   const pandaId = query.get("pandaId");
   console.log(pandaId);
 
-  window.Telegram.WebApp.init();
+  window?.Telegram?.WebApp.init();
 
-  const startParam = window.Telegram.WebApp.initDataUnsafe.start_param;
+  const startParam = window?.Telegram?.WebApp?.initDataUnsafe?.start_param;
 
   useEffect(() => {
     const getUserProfile = async () => {
