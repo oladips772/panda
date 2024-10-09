@@ -5,47 +5,81 @@ import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 function Loading() {
-  const navigate = useNavigate();
-  const location = useLocation();
+  
+   const navigate = useNavigate();
+   const location = useLocation();
 
-  const searchParams = new URLSearchParams(location.search);
-  const startapp = searchParams.get("startapp"); // Referral code
+   // Function to parse the URL and extract Telegram WebApp data
+   const parseTelegramData = () => {
+     const searchParams = new URLSearchParams(location.search);
+     const tgWebAppData = searchParams.get("tgWebAppData");
 
-  const startParam =
-    window?.Telegram?.WebApp?.initDataUnsafe?.start_param || startapp;
-  const userData = window?.Telegram?.WebApp?.initDataUnsafe?.user;
+     if (tgWebAppData) {
+       try {
+         // Decode the URL-encoded string
+         const decodedData = decodeURIComponent(tgWebAppData);
 
-  useEffect(() => {
-    const handleUserAccount = async () => {
-      try {
-        if (!userData?.id || !startParam) {
-          console.log("Missing user data or referral code.");
-          return;
-        }
+         // Extract the 'user' object from the decoded data
+         const userMatch = decodedData.match(/user%3D(.+?)%26/);
+         if (userMatch && userMatch[1]) {
+           const userDataString = decodeURIComponent(userMatch[1]);
+           const userData = JSON.parse(userDataString);
+           return { userData, searchParams };
+         }
+       } catch (error) {
+         console.error("Error parsing Telegram WebApp data:", error);
+       }
+     }
+     return { userData: null, searchParams };
+   };
 
-        // Send user data and referral code to the backend
-        const response = await axios.post(
-          "https://panda-backend-b67c.onrender.com/api/users/check-or-create",
-          {
-            userId: userData.id,
-            firstName: userData.first_name,
-            lastName: userData.last_name,
-            referralCode: startParam,
-          }
-        );
+   // Extract user data and searchParams from Telegram WebApp initDataUnsafe or from URL
+   const { userData, searchParams } = parseTelegramData();
 
-        const userInfo = response.data;
-        console.log("User info:", userInfo);
+   // Extract referral code (start_param) from Telegram WebApp or URL
+   const startParam =
+     window?.Telegram?.WebApp?.initDataUnsafe?.start_param ||
+     searchParams.get("startapp");
 
-        localStorage.setItem("userInfo", JSON.stringify(userInfo));
-        navigate("/home");
-      } catch (error) {
-        console.log("Error handling user account:", error);
-      }
-    };
+   // Debugging logs to ensure correct extraction
+   console.log("startParam:", startParam); // Log the start_param/referral code
+   console.log("userData:", userData); // Log the Telegram user data
 
-    handleUserAccount();
-  }, [startParam, userData, navigate]);
+   useEffect(() => {
+     const handleUserAccount = async () => {
+       try {
+         if (!userData?.id || !startParam) {
+           console.log("Missing user data or referral code.");
+           return;
+         }
+
+         // Send user data and referral code to the backend
+         const response = await axios.post(
+           "https://panda-backend-b67c.onrender.com/api/users/check-or-create",
+           {
+             userId: userData.id,
+             firstName: userData.first_name,
+             lastName: userData.last_name,
+             referralCode: startParam, // Send the referral code
+           }
+         );
+
+         const userInfo = response.data;
+         console.log("User info:", userInfo);
+
+         // Store the user info in localStorage and navigate to home
+         localStorage.setItem("userInfo", JSON.stringify(userInfo));
+         navigate("/home");
+       } catch (error) {
+         console.log("Error handling user account:", error);
+       }
+     };
+
+     // Only execute if we have both user data and referral code
+     if (userData && startParam) {
+       handleUserAccount();
+     }
+   }, [startParam, userData, navigate]);
 
   return (
     <div className="relative">
