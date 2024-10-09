@@ -8,57 +8,43 @@ function Loading() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const startParam = window?.Telegram?.WebApp?.initDataUnsafe?.start_param;
+  const searchParams = new URLSearchParams(location.search);
+  const startapp = searchParams.get("startapp"); // Referral code
 
-  // Function to parse URL fragment (after #) and extract tgWebAppData
-  const getTGWebAppDataFromURL = () => {
-    const hashParams = new URLSearchParams(window.location.hash.substring(1)); // Get the fragment after #
-    const tgWebAppData = hashParams.get("tgWebAppData");
-    return tgWebAppData;
-  };
-
-  // Function to parse tgWebAppData from the URL fragment
-  const parseTGWebAppData = (tgWebAppData) => {
-    try {
-      const decodedData = decodeURIComponent(tgWebAppData);
-      const data = decodedData.match(/user=({.*?})/);
-      if (data && data[1]) {
-        return JSON.parse(decodeURIComponent(data[1]));
-      }
-      return null;
-    } catch (error) {
-      console.error("Failed to parse tgWebAppData:", error);
-      return null;
-    }
-  };
-
-  // Get tgWebAppData from URL fragment (hash)
-  const tgWebAppData = getTGWebAppDataFromURL();
-  const userData = tgWebAppData ? parseTGWebAppData(tgWebAppData) : null;
+  const startParam =
+    window?.Telegram?.WebApp?.initDataUnsafe?.start_param || startapp;
+  const userData = window?.Telegram?.WebApp?.initDataUnsafe?.user;
 
   useEffect(() => {
-    const getUserProfile = async () => {
+    const handleUserAccount = async () => {
       try {
-        const userId = startParam || userData?.id;
-        if (!userId) {
-          console.log("No user information found");
+        if (!userData?.id || !startParam) {
+          console.log("Missing user data or referral code.");
           return;
         }
 
-        // Fetch user profile using the userId (startParam or tgWebAppData)
-        const { data } = await axios.get(
-          `https://panda-backend-b67c.onrender.com/api/users/profile/${userId}`
+        // Send user data and referral code to the backend
+        const response = await axios.post(
+          "https://panda-backend-b67c.onrender.com/api/users/check-or-create",
+          {
+            userId: userData.id,
+            firstName: userData.first_name,
+            lastName: userData.last_name,
+            referralCode: startParam,
+          }
         );
-        console.log("User profile:", data);
 
-        localStorage.setItem("userInfo", JSON.stringify(data));
+        const userInfo = response.data;
+        console.log("User info:", userInfo);
+
+        localStorage.setItem("userInfo", JSON.stringify(userInfo));
         navigate("/home");
       } catch (error) {
-        console.log("Error fetching user profile:", error);
+        console.log("Error handling user account:", error);
       }
     };
 
-    getUserProfile();
+    handleUserAccount();
   }, [startParam, userData, navigate]);
 
   return (

@@ -3,12 +3,23 @@ import React from "react";
 import BottomTab from "../components/BottomTab";
 import { LuCopy } from "react-icons/lu";
 import { BsPatchCheckFill } from "react-icons/bs";
+import toast, { Toaster } from "react-hot-toast";
 
 function Profile() {
   const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+  const refCode = userInfo?.referralCode;
+  const refLink = `https://t.me/Panda_tokenfarmbot/PandaTokenFarm?startapp=${refCode}`;
+
+  const copyToClipboard = () => {
+    if (refCode) {
+      navigator.clipboard.writeText(refLink);
+      toast.success("copied");
+    }
+  };
 
   return (
     <div>
+      <Toaster />
       <div className="p-3 h-[100%]">
         {/* top */}
         <div className="flex items-center text-white bg-[#1b172b] p-[10px] rounded justify-between">
@@ -19,6 +30,7 @@ function Profile() {
           </div>
         </div>
       </div>
+
       {/* influencer badge */}
 
       <div className="flex items-center justify-center my-2 space-x-1 -mb-[2px]">
@@ -54,11 +66,14 @@ function Profile() {
       </div>
       {/* referral button */}
       <div className="p-3">
-        <button className="mt-8 text-gray-200 flex flex-row items-center justify-center bg-purple-800 rounded p-3 w-full">
+        <button
+          onClick={copyToClipboard}
+          className="mt-8 text-gray-200 flex flex-row items-center justify-center bg-purple-800 rounded p-3 w-full"
+        >
           Copy Referral Link
           <LuCopy className="ml-2 font-[600] text-gray-200" size={19} />
         </button>
-        <p className="text-gray-300 mt-1 text-sm">
+        <p className="text-gray-300 mt-1 text-[13px]">
           Invite a friend to earn 1,000 panda tokens
         </p>
       </div>
