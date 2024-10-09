@@ -6,14 +6,18 @@ import axios from "axios";
 
 function Loading() {
   const navigate = useNavigate();
-  // Initialize the Telegram Web App
-  window?.Telegram?.WebApp.init();
+  const location = useLocation();
 
-  // Extract tgWebAppStartParam from URL
-  const query = new URLSearchParams(window.location.search);
-  const startParam = query.get("tgWebAppStartParam");
+  const startParam = window?.Telegram?.WebApp?.initDataUnsafe?.start_param;
 
-  // Function to parse tgWebAppData from URL
+  // Function to parse URL fragment (after #) and extract tgWebAppData
+  const getTGWebAppDataFromURL = () => {
+    const hashParams = new URLSearchParams(window.location.hash.substring(1)); // Get the fragment after #
+    const tgWebAppData = hashParams.get("tgWebAppData");
+    return tgWebAppData;
+  };
+
+  // Function to parse tgWebAppData from the URL fragment
   const parseTGWebAppData = (tgWebAppData) => {
     try {
       const decodedData = decodeURIComponent(tgWebAppData);
@@ -28,8 +32,8 @@ function Loading() {
     }
   };
 
-  // Fallback if startParam is unavailable
-  const tgWebAppData = query.get("tgWebAppData");
+  // Get tgWebAppData from URL fragment (hash)
+  const tgWebAppData = getTGWebAppDataFromURL();
   const userData = tgWebAppData ? parseTGWebAppData(tgWebAppData) : null;
 
   useEffect(() => {
