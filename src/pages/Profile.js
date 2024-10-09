@@ -5,6 +5,8 @@ import { LuCopy } from "react-icons/lu";
 import { BsPatchCheckFill } from "react-icons/bs";
 
 function Profile() {
+  const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+
   return (
     <div>
       <div className="p-3 h-[100%]">
@@ -12,7 +14,7 @@ function Profile() {
         <div className="flex items-center text-white bg-[#1b172b] p-[10px] rounded justify-between">
           <h1 className="font-[600] text-[13px]">Panda User ID:</h1>
           <div className="flex items-center">
-            <span className="font-[500]">#jhd867k</span>
+            <span className="font-[500]">#{userInfo?.pandaId}</span>
             <LuCopy className="ml-2 font-[600] text-purple-500" size={19} />
           </div>
         </div>
