@@ -8,28 +8,34 @@ function Loading() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // Function to parse the URL fragment and extract Telegram WebApp data
-  const parseTelegramData = () => {
-    // Extract the hash fragment from the URL
-    const hash = location.hash;
+  // Function to parse URL hash and extract Telegram WebApp data
+  const parseTelegramDataFromHash = () => {
+    const hash = location.hash; // Get the URL hash (after #)
+
+    console.log("Hash found in URL:", hash); // Log the hash for debugging
 
     if (hash) {
       try {
-        // Create a URLSearchParams instance from the hash fragment (removing the '#')
+        // Create URLSearchParams from the hash, removing the first character (#)
         const searchParams = new URLSearchParams(hash.substring(1));
 
-        // Extract the tgWebAppData parameter from the hash fragment
+        // Extract tgWebAppData from the hash parameters
         const tgWebAppData = searchParams.get("tgWebAppData");
 
+        console.log("tgWebAppData from hash:", tgWebAppData); // Log for debugging
+
         if (tgWebAppData) {
-          // Decode the URL-encoded string
+          // Decode the URL-encoded data
           const decodedData = decodeURIComponent(tgWebAppData);
+
+          console.log("Decoded tgWebAppData:", decodedData); // Log the decoded data
 
           // Extract the 'user' object from the decoded data
           const userMatch = decodedData.match(/user%3D(.+?)%26/);
           if (userMatch && userMatch[1]) {
             const userDataString = decodeURIComponent(userMatch[1]);
             const userData = JSON.parse(userDataString);
+            console.log("Extracted user data:", userData); // Log user data
             return { userData, searchParams };
           }
         }
@@ -41,21 +47,20 @@ function Loading() {
   };
 
   // Extract user data and searchParams from the hash
-  const { userData, searchParams } = parseTelegramData();
+  const { userData, searchParams } = parseTelegramDataFromHash();
 
-  // Extract referral code (start_param) from Telegram WebApp or URL
+  // Extract referral code (start_param) from Telegram WebApp or URL hash
   const startParam =
     searchParams?.get("startapp") ||
-    window.Telegram?.WebApp?.initDataUnsafe?.start_param;
+    window?.Telegram?.WebApp?.initDataUnsafe?.start_param;
 
   // Debugging logs to ensure correct extraction
-  console.log("startParam:", startParam); // Log the start_param/referral code
-  console.log("userData:", userData); // Log the Telegram user data
+  console.log("startParam (referral code):", startParam); // Log the referral code
+  console.log("userData (Telegram user data):", userData); // Log the user data
 
   useEffect(() => {
     const handleUserAccount = async () => {
       try {
-        // Check if userData and startParam are available
         if (!userData?.id || !startParam) {
           console.log("Missing user data or referral code.");
           return;
@@ -73,7 +78,7 @@ function Loading() {
         );
 
         const userInfo = response.data;
-        console.log("User info:", userInfo);
+        console.log("User info from backend:", userInfo); // Log the response data
 
         // Store the user info in localStorage and navigate to home
         localStorage.setItem("userInfo", JSON.stringify(userInfo));
@@ -83,8 +88,8 @@ function Loading() {
       }
     };
 
-    // Only execute if we have both user data and referral code
-    if (userData || startParam) {
+    // Execute only if both user data and referral code are available
+    if (userData && startParam) {
       handleUserAccount();
     }
   }, [startParam, userData, navigate]);
