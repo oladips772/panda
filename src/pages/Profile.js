@@ -11,6 +11,7 @@ import { ScaleLoader } from "react-spinners";
 function Profile() {
   const userInfo = JSON.parse(localStorage.getItem("userInfo"));
   const refCode = userInfo?.referralCode;
+  const pandaId = userInfo?.pandaId;
   const refLink = `https://t.me/Panda_tokenfarmbot/PandaTokenFarm?startapp=${refCode}`;
   const dispatch = useDispatch();
   const { loading, frens } = useSelector((state) => state.fetchFrens);
@@ -22,9 +23,18 @@ function Profile() {
     dispatch(GetFriends());
   }, [dispatch]);
 
+  // ? copy referral link
   const copyToClipboard = () => {
     if (refCode) {
       navigator.clipboard.writeText(refLink);
+      toast.success("copied");
+    }
+  };
+
+  // ? copy pandaId
+  const copyPandaId = () => {
+    if (pandaId) {
+      navigator.clipboard.writeText(pandaId);
       toast.success("copied");
     }
   };
@@ -36,7 +46,7 @@ function Profile() {
         {/* top */}
         <div className="flex items-center text-white bg-[#1b172b] p-[10px] rounded justify-between">
           <h1 className="font-[600] text-[13px]">Panda User ID:</h1>
-          <div className="flex items-center">
+          <div className="flex items-center" onClick={copyPandaId}>
             <span className="font-[500] text-[13px]">#{userInfo?.pandaId}</span>
             <LuCopy className="ml-2 font-[600] text-purple-500" size={19} />
           </div>

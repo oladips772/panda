@@ -6,11 +6,21 @@ import { useSelector, useDispatch } from "react-redux";
 import { GetTasks } from "../redux/actions/TaskAction";
 import { ScaleLoader } from "react-spinners";
 import Task from "../components/Task";
+import toast, { Toaster } from "react-hot-toast";
 
 function Earn() {
   const dispatch = useDispatch();
   const { loading, tasks } = useSelector((state) => state.fetchTasks);
   const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+  const pandaId = userInfo?.pandaId;
+
+  // ? copy pandaId
+  const copyPandaId = () => {
+    if (pandaId) {
+      navigator.clipboard.writeText(pandaId);
+      toast.success("copied");
+    }
+  };
 
   useEffect(() => {
     dispatch(GetTasks());
@@ -18,11 +28,12 @@ function Earn() {
 
   return (
     <div className="">
+      <Toaster />
       <div className="p-3 h-[80vh]">
         {/* top */}
         <div className="flex items-center text-white bg-[#1b172b] p-[10px] rounded justify-between">
           <h1 className="font-[600] text-[13px]">Panda User ID:</h1>
-          <div className="flex items-center">
+          <div className="flex items-center" onClick={copyPandaId}>
             <span className="font-[500] text-[13px]">#{userInfo?.pandaId}</span>
             <LuCopy className="ml-2 font-[600] text-purple-600" size={19} />
           </div>
