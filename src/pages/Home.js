@@ -120,7 +120,7 @@ function Home() {
           <p className="text-purple-400 text-[16px] -mb-[6px] font-[500] ">
             $PTFM
           </p>
-          <h1 className="text-[35px] text-purple-300 font-[700] flex flex-row items-center">
+          <h1 className="text-[36px] text-purple-300 font-[700] flex flex-row items-center">
             <TbCoins color="#d8b4fe" size={25} className="mr-[6px]" />{" "}
             {coinBalance?.toLocaleString()}
           </h1>
