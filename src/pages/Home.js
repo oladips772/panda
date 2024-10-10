@@ -3,8 +3,11 @@ import React, { useEffect, useState } from "react";
 import BottomTab from "../components/BottomTab";
 import { LuCopy } from "react-icons/lu";
 import panda1 from "../images/panda1.png";
+import panda2 from "../images/panda2.png";
+import panda3 from "../images/panda3.png";
 import toast from "react-hot-toast";
 import axios from "axios";
+import { TbCoins } from "react-icons/tb";
 
 function Home() {
   const userInfo = JSON.parse(localStorage.getItem("userInfo"));
@@ -12,6 +15,19 @@ function Home() {
   const pandaId = userInfo?.pandaId;
   const token = JSON.parse(localStorage.getItem("token"));
   const [loading, setLoading] = useState(false);
+
+  const images = [panda1, panda2, panda3];
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prevIndex) =>
+        prevIndex === images.length - 1 ? 0 : prevIndex + 1
+      );
+    }, 2000); // Change image every 2 seconds
+
+    return () => clearInterval(interval); // Clean up the interval on component unmount
+  }, []);
 
   const [timeLeft, setTimeLeft] = useState(0); // Countdown timer
   const [isFarming, setIsFarming] = useState(false); // Farming state
@@ -103,7 +119,7 @@ function Home() {
 
   return (
     <div>
-      <div className="p-3 h-[80vh] bg-[#0e0c16e0]">
+      <div className="p-3 h-[100vh] bg-[#0e0c16e0]">
         {/* top */}
         <div className="flex items-center text-white bg-[#1b172b] p-[10px] rounded justify-between">
           <h1 className="font-[600] text-[13px]">Panda User ID:</h1>
@@ -113,23 +129,27 @@ function Home() {
           </div>
         </div>
         {/* coin Balance */}
-        <div className="flex items-center justify-center p-2 mt-[38px]">
-          <h1 className="text-[47px] text-purple-400 font-[700]">
-            {coinBalance?.coinBalance || coinBalance}
+        <div className="flex items-center flex-col justify-center p-2 mt-[28px]">
+          <p className="text-purple-500 text-[15.5px] -mb-[6px] font-[500] ">
+            $PTFM
+          </p>
+          <h1 className="text-[34px] text-purple-300 font-[700] flex flex-row items-center">
+            <TbCoins color="#d8b4fe" size={25} className="mr-[6px]" />{" "}
+            {coinBalance?.toLocaleString()}
           </h1>
         </div>
         <div>
           <img
-            src={panda1}
-            alt=""
-            className="h-[280px] object-contain mx-auto"
+            src={images[currentImageIndex]}
+            alt="Panda"
+            className="h-[260px] w-[200px]  mx-auto transition-all duration-500 ease-in-out panda"
           />
         </div>
         {/* claim button */}
         <div className="flex items-center justify-center mx-2 h-[30%]">
           {!isFarming && !canClaim && (
             <button
-              className="h-[55px] bg-purple-700 text-gray-100 w-full rounded"
+              className="h-[55px] bg-purple-700 font-[500] text-gray-100 w-full rounded"
               onClick={startFarming}
             >
               Start Farming
@@ -139,7 +159,7 @@ function Home() {
           {isFarming && (
             <button
               disabled
-              className="h-[55px] bg-gray-700 text-gray-300 w-full rounded"
+              className="h-[55px] bg-gray-700 font-[500] text-gray-300 w-full rounded"
             >
               <p>Claim in: {formatTime(timeLeft)}</p>
             </button>
@@ -151,7 +171,7 @@ function Home() {
               onClick={claimRewards}
               disabled={loading}
             >
-              {loading ? "Claiming.." : "Claim 3,000"}
+              {loading ? "Claiming.." : "Claim 3,000 "}
             </button>
           )}
         </div>
