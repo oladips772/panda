@@ -1,9 +1,10 @@
 /** @format */
 import { combineReducers } from "redux";
-import { FetchTasksReducer } from "./reducers/TaskReducer";
+import { FetchFriendsReducer, FetchTasksReducer } from "./reducers/TaskReducer";
 
 const rootReducer = combineReducers({
   fetchTasks: FetchTasksReducer,
+  fetchFrens: FetchFriendsReducer,
 });
 
 export default rootReducer;

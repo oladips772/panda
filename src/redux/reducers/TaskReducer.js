@@ -22,3 +22,27 @@ export const FetchTasksReducer = (state = { tasks: [] }, action) => {
       return state;
   }
 };
+
+// ? get frens reducer
+export const FetchFriendsReducer = (state = { frens: [] }, action) => {
+  switch (action.type) {
+    case "GET_FRENS_REQUEST":
+      return {
+        loading: true,
+        frens: [],
+      };
+    case "GET_FRENS_SUCCESS":
+      return {
+        loading: false,
+        frens: action.payload,
+      };
+    case "GET_FRENS_FAIL":
+      return {
+        loading: false,
+        frens: [],
+        error: action.payload,
+      };
+    default:
+      return state;
+  }
+};

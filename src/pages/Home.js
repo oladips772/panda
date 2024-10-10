@@ -19,7 +19,9 @@ function Home() {
         </div>
         {/* coin Balance */}
         <div className="flex items-center justify-center p-2 mt-[38px]">
-          <h1 className="text-[47px] text-purple-400 font-[700]">5,922</h1>
+          <h1 className="text-[47px] text-purple-400 font-[700]">
+            {userInfo?.coinBalance}
+          </h1>
         </div>
         <div>
           <img

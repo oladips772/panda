@@ -1,14 +1,18 @@
 /** @format */
-import React from "react";
+import React, { useEffect } from "react";
 import BottomTab from "../components/BottomTab";
 import { LuCopy } from "react-icons/lu";
 import { BsPatchCheckFill } from "react-icons/bs";
 import toast, { Toaster } from "react-hot-toast";
+import { useDispatch, useSelector } from "react-redux";
+import { GetFriends } from "../redux/actions/TaskAction";
 
 function Profile() {
   const userInfo = JSON.parse(localStorage.getItem("userInfo"));
   const refCode = userInfo?.referralCode;
   const refLink = `https://t.me/Panda_tokenfarmbot/PandaTokenFarm?startapp=${refCode}`;
+  const dispatch = useDispatch();
+  const { loading, frens } = useSelector((state) => state.fetchFrens);
 
   const copyToClipboard = () => {
     if (refCode) {
