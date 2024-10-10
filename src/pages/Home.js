@@ -136,7 +136,7 @@ function Home() {
         <div className="flex items-center justify-center mx-2 h-[30%]">
           {!isFarming && !canClaim && (
             <button
-              className="h-[55px] bg-purple-700 font-[500] text-gray-100 w-full rounded-[28px]"
+              className="h-[55px] bg-purple-800 font-[500] text-gray-100 w-full rounded-[28px]"
               onClick={startFarming}
             >
               Start Farming
@@ -154,7 +154,7 @@ function Home() {
 
           {canClaim && !isFarming && (
             <button
-              className="h-[55px] bg-purple-700 font-[500] text-gray-200 w-full rounded-[28px]"
+              className="h-[55px] bg-purple-800 font-[500] text-gray-200 w-full rounded-[28px]"
               onClick={claimRewards}
               disabled={loading}
             >
