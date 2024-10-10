@@ -137,17 +137,21 @@ function Home() {
           )}
 
           {isFarming && (
-            <button className="h-[55px] bg-gray-700 text-gray-400 w-full rounded">
+            <button
+              disabled
+              className="h-[55px] bg-gray-700 text-gray-300 w-full rounded"
+            >
               <p>Claim in: {formatTime(timeLeft)}</p>
             </button>
           )}
 
           {canClaim && !isFarming && (
             <button
-              className="h-[55px] bg-purple-700 text-gray-100 w-full rounded"
+              className="h-[55px] bg-purple-700 font-[500] text-gray-100 w-full rounded"
               onClick={claimRewards}
+              disabled={loading}
             >
-              {loading ? "Claiming.." : "Claim Rewards"}
+              {loading ? "Claiming.." : "Claim 3,000"}
             </button>
           )}
         </div>
