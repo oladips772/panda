@@ -17,7 +17,7 @@ function Profile() {
 
   useEffect(() => {
     if (frens?.length) {
-      return
+      return;
     }
     dispatch(GetFriends());
   }, [dispatch]);
@@ -37,14 +37,14 @@ function Profile() {
         <div className="flex items-center text-white bg-[#1b172b] p-[10px] rounded justify-between">
           <h1 className="font-[600] text-[13px]">Panda User ID:</h1>
           <div className="flex items-center">
-            <span className="font-[500]">#{userInfo?.pandaId}</span>
+            <span className="font-[500] text-[13px]">#{userInfo?.pandaId}</span>
             <LuCopy className="ml-2 font-[600] text-purple-500" size={19} />
           </div>
         </div>
       </div>
 
       {/* influencer badge */}
-      {!userInfo?.isInfluencer && (
+      {userInfo?.isInfluencer && (
         <>
           <div className="flex items-center justify-center my-2 space-x-1 -mb-[2px]">
             <h1 className="text-gray-200 font-[600] text-lg">Influencer</h1>
@@ -64,7 +64,7 @@ function Profile() {
         <>
           {frens?.length >= 1 ? (
             <>
-              <p className="text-[16px] text-gray-200 mt-4 mx-2">
+              <p className="text-[16px] text-gray-200 mt-4 mx-[10px]">
                 Your Friends
               </p>
               {frens?.map((fren, index) => (
