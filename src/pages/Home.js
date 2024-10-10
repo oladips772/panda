@@ -16,19 +16,6 @@ function Home() {
   const token = JSON.parse(localStorage.getItem("token"));
   const [loading, setLoading] = useState(false);
 
-  const images = [panda1, panda2, panda3];
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentImageIndex((prevIndex) =>
-        prevIndex === images.length - 1 ? 0 : prevIndex + 1
-      );
-    }, 2000); // Change image every 2 seconds
-
-    return () => clearInterval(interval); // Clean up the interval on component unmount
-  }, []);
-
   const [timeLeft, setTimeLeft] = useState(0); // Countdown timer
   const [isFarming, setIsFarming] = useState(false); // Farming state
   const [canClaim, setCanClaim] = useState(false);
@@ -130,26 +117,26 @@ function Home() {
         </div>
         {/* coin Balance */}
         <div className="flex items-center flex-col justify-center p-2 mt-[28px]">
-          <p className="text-purple-500 text-[15.5px] -mb-[6px] font-[500] ">
+          <p className="text-purple-400 text-[16px] -mb-[6px] font-[500] ">
             $PTFM
           </p>
-          <h1 className="text-[34px] text-purple-300 font-[700] flex flex-row items-center">
+          <h1 className="text-[35px] text-purple-300 font-[700] flex flex-row items-center">
             <TbCoins color="#d8b4fe" size={25} className="mr-[6px]" />{" "}
             {coinBalance?.toLocaleString()}
           </h1>
         </div>
         <div>
           <img
-            src={images[currentImageIndex]}
+            src={panda1}
             alt="Panda"
-            className="h-[260px] w-[200px]  mx-auto transition-all duration-500 ease-in-out panda"
+            className="h-[260px] mx-auto transition-all duration-500 ease-in-out panda"
           />
         </div>
         {/* claim button */}
         <div className="flex items-center justify-center mx-2 h-[30%]">
           {!isFarming && !canClaim && (
             <button
-              className="h-[55px] bg-purple-700 font-[500] text-gray-100 w-full rounded"
+              className="h-[55px] bg-purple-700 font-[500] text-gray-100 w-full rounded-[28px]"
               onClick={startFarming}
             >
               Start Farming
@@ -159,7 +146,7 @@ function Home() {
           {isFarming && (
             <button
               disabled
-              className="h-[55px] bg-gray-700 font-[500] text-gray-300 w-full rounded"
+              className="h-[55px] bg-gray-700 font-[500] text-gray-300 w-full rounded-[28px]"
             >
               <p>Claim in: {formatTime(timeLeft)}</p>
             </button>
@@ -167,7 +154,7 @@ function Home() {
 
           {canClaim && !isFarming && (
             <button
-              className="h-[55px] bg-purple-700 font-[500] text-gray-100 w-full rounded"
+              className="h-[55px] bg-purple-700 font-[500] text-gray-200 w-full rounded-[28px]"
               onClick={claimRewards}
               disabled={loading}
             >
