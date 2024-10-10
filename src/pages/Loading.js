@@ -83,6 +83,7 @@ function Loading() {
 
         // Store the user info in localStorage and navigate to home
         localStorage.setItem("userInfo", JSON.stringify(userInfo));
+        localStorage.setItem("token", JSON.stringify(userInfo?.token));
         navigate("/home");
       } catch (error) {
         console.log("Error handling user account:", error);
@@ -97,12 +98,12 @@ function Loading() {
 
   return (
     <div className="relative">
-      <img src={logo} className="h-full w-full object-cover" alt="" />
+      <img src={logo} className="h-[100vh] w-full object-cover" alt="" />
       <div className="bg-[#0000001f] absolute top-0 left-0 right-0 z-99 bottom-0">
         <h1 className="text-white font-[600] text-[26px] text-center mt-[33px]">
           Panda Token Farm
         </h1>
-        <p className="text-white text-[12px] text-center">
+        <p className="text-white text-[11.5px] font-[600] text-center">
           Build your coin balance and brace up for upcoming airdrop.
         </p>
         <p className="text-white text-center absolute bottom-6 left-[42%] animate-pulse">

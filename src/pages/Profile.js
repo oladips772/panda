@@ -42,10 +42,10 @@ function Profile() {
       </p>
 
       {/* frens */}
-      <div className="mt-4 px-2">
-        <p className="text-[17px] text-gray-200 mb-2 mx-2">Your Friends</p>
+      <div className="mt-[18px] px-2">
+        <p className="text-[16px] text-gray-200 mb-2 mx-2">Your Friends</p>
         {/* frens item */}
-        <div className="flex items-center my-[10px]">
+        <div className="flex items-center my-[12px]">
           <div className="flex items-center justify-center h-[35px] w-[35px] bg-purple-700 rounded-full mx-1">
             <p className="text-gray-200 font-[600] text-[18px]">K</p>
           </div>
@@ -54,7 +54,7 @@ function Profile() {
           </span>
           <span className="text-gray-200">300728</span>
         </div>
-        <div className="flex items-center my-[10px]">
+        <div className="flex items-center my-[12px]">
           <div className="flex items-center justify-center h-[35px] w-[35px] bg-purple-700 rounded-full mx-1">
             <p className="text-gray-200 font-[600] text-[18px]">K</p>
           </div>
@@ -73,7 +73,7 @@ function Profile() {
           Copy Referral Link
           <LuCopy className="ml-2 font-[600] text-gray-200" size={19} />
         </button>
-        <p className="text-gray-300 mt-1 text-[13px]">
+        <p className="text-gray-300 mt-1 text-[12px]">
           Invite a friend to earn 1,000 panda tokens
         </p>
       </div>
