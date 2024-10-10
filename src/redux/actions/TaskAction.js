@@ -27,3 +27,28 @@ export const GetTasks = () => async (dispatch) => {
     });
   }
 };
+
+// ? get friends action
+export const GetFriends = () => async (dispatch) => {
+  try {
+    dispatch({ type: "GET_FRENS_REQUEST" });
+    const { data } = await axios.get(`${URI}/api/users/my-frens`, {
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    dispatch({
+      type: "GET_FRENS_SUCCESS",
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: "GET_FRENS_FAIL",
+      payload:
+        error.response && error.response.data.error
+          ? error.response.data.error
+          : error.error,
+    });
+  }
+};
