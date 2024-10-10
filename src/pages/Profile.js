@@ -6,6 +6,7 @@ import { BsPatchCheckFill } from "react-icons/bs";
 import toast, { Toaster } from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { GetFriends } from "../redux/actions/TaskAction";
+import { ScaleLoader } from "react-spinners";
 
 function Profile() {
   const userInfo = JSON.parse(localStorage.getItem("userInfo"));
@@ -13,6 +14,13 @@ function Profile() {
   const refLink = `https://t.me/Panda_tokenfarmbot/PandaTokenFarm?startapp=${refCode}`;
   const dispatch = useDispatch();
   const { loading, frens } = useSelector((state) => state.fetchFrens);
+
+  useEffect(() => {
+    if (frens?.length) {
+      return
+    }
+    dispatch(GetFriends());
+  }, [dispatch]);
 
   const copyToClipboard = () => {
     if (refCode) {
@@ -36,38 +44,60 @@ function Profile() {
       </div>
 
       {/* influencer badge */}
-
-      <div className="flex items-center justify-center my-2 space-x-1 -mb-[2px]">
-        <h1 className="text-gray-200 font-[600] text-lg">Influencer</h1>
-        <BsPatchCheckFill className="text-purple-500" size={17} />
-      </div>
-      <p className="text-gray-300 text-center text-[12px]">
-        You have earned the influencer badge
-      </p>
+      {!userInfo?.isInfluencer && (
+        <>
+          <div className="flex items-center justify-center my-2 space-x-1 -mb-[2px]">
+            <h1 className="text-gray-200 font-[600] text-lg">Influencer</h1>
+            <BsPatchCheckFill className="text-purple-500" size={17} />
+          </div>
+          <p className="text-gray-300 text-center text-[12px]">
+            You have earned the influencer badge
+          </p>
+        </>
+      )}
+      {/* list friends */}
+      {loading ? (
+        <div className="flex items-center justify-center mt-6">
+          <ScaleLoader height={25} color="#a855f7" />
+        </div>
+      ) : (
+        <>
+          {frens?.length >= 1 ? (
+            <>
+              <p className="text-[16px] text-gray-200 mt-4 mx-2">
+                Your Friends
+              </p>
+              {frens?.map((fren, index) => (
+                <div className="mt-[18px] px-2" key={index}>
+                  {/* frens item */}
+                  <div className="flex items-center my-[12px]">
+                    <div className="flex items-center justify-center h-[35px] w-[35px] bg-purple-700 rounded-full mx-1">
+                      <p className="text-gray-200 font-[600] text-[18px]">
+                        {fren?.name?.slice(0, 1)}
+                      </p>
+                    </div>
+                    <span className="text-gray-200 ml-2 text-[16px] flex-1">
+                      {fren?.name}
+                    </span>
+                    <span className="text-gray-200 text-[12px] font-[600]">
+                      +1,000
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </>
+          ) : (
+            <div>
+              <h1 className="text-gray-200 text-[16px] text-center my-6">
+                You have not invited anyone yet..
+              </h1>
+            </div>
+          )}
+        </>
+      )}
 
       {/* frens */}
-      <div className="mt-[18px] px-2">
-        <p className="text-[16px] text-gray-200 mb-2 mx-2">Your Friends</p>
-        {/* frens item */}
-        <div className="flex items-center my-[12px]">
-          <div className="flex items-center justify-center h-[35px] w-[35px] bg-purple-700 rounded-full mx-1">
-            <p className="text-gray-200 font-[600] text-[18px]">K</p>
-          </div>
-          <span className="text-gray-200 ml-2 text-[16px] flex-1">
-            Kyenret Kutwal
-          </span>
-          <span className="text-gray-200">300728</span>
-        </div>
-        <div className="flex items-center my-[12px]">
-          <div className="flex items-center justify-center h-[35px] w-[35px] bg-purple-700 rounded-full mx-1">
-            <p className="text-gray-200 font-[600] text-[18px]">K</p>
-          </div>
-          <span className="text-gray-200 ml-2 text-[16px] flex-1">
-            Kyenret Kutwal
-          </span>
-          <span className="text-gray-200">300728</span>
-        </div>
-      </div>
+
       {/* referral button */}
       <div className="p-3">
         <button
