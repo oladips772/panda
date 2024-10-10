@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import BottomTab from "../components/BottomTab";
 import { LuCopy } from "react-icons/lu";
 import { BsPatchCheckFill } from "react-icons/bs";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { GetFriends } from "../redux/actions/TaskAction";
 import { ScaleLoader } from "react-spinners";
@@ -41,7 +41,6 @@ function Profile() {
 
   return (
     <div>
-      <Toaster />
       <div className="p-3 h-[100%]">
         {/* top */}
         <div className="flex items-center text-white bg-[#1b172b] p-[10px] rounded justify-between">

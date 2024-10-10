@@ -7,10 +7,12 @@ import Influencers from "./pages/Influencers";
 import Profile from "./pages/Profile";
 import Airdrop from "./pages/Airdrop";
 import Loading from "./pages/Loading";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   return (
     <div className="App">
+      <Toaster />
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Loading />} />

@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { GetTasks } from "../redux/actions/TaskAction";
 import { ScaleLoader } from "react-spinners";
 import Task from "../components/Task";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 
 function Earn() {
   const dispatch = useDispatch();
@@ -23,12 +23,14 @@ function Earn() {
   };
 
   useEffect(() => {
+    if (tasks?.length) {
+      return;
+    }
     dispatch(GetTasks());
   }, [dispatch]);
 
   return (
     <div className="">
-      <Toaster />
       <div className="p-3 h-[80vh]">
         {/* top */}
         <div className="flex items-center text-white bg-[#1b172b] p-[10px] rounded justify-between">
@@ -42,11 +44,6 @@ function Earn() {
         <h1 className="text-gray-100 mt-3 font-[500] text-[15px]">
           Complete Tasks to earn more panda tokens.
         </h1>
-        <p className="text-gray-400 text-[12px]">
-          Completing tasks are mandatory for{" "}
-          <span className="text-gray-300 font-[500]">airdrop</span>{" "}
-          qualification.
-        </p>
         <h1 className="text-gray-100 text-lg mt-6 font-[600]">Tasks</h1>
         {/* tasks div */}
         {loading ? (

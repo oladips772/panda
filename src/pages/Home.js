@@ -3,7 +3,7 @@ import React from "react";
 import BottomTab from "../components/BottomTab";
 import { LuCopy } from "react-icons/lu";
 import panda1 from "../images/panda1.png";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 
 function Home() {
   const userInfo = JSON.parse(localStorage.getItem("userInfo"));
@@ -19,7 +19,6 @@ function Home() {
 
   return (
     <div>
-      <Toaster />
       <div className="p-3 h-[80vh] bg-[#0e0c16e0]">
         {/* top */}
         <div className="flex items-center text-white bg-[#1b172b] p-[10px] rounded justify-between">

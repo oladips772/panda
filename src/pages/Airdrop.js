@@ -2,7 +2,7 @@
 import React from "react";
 import BottomTab from "../components/BottomTab";
 import { LuCopy } from "react-icons/lu";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 
 function Airdrop() {
   const userInfo = JSON.parse(localStorage.getItem("userInfo"));
@@ -18,7 +18,6 @@ function Airdrop() {
 
   return (
     <div>
-      <Toaster />
       <div className=" p-3">
         {/* top */}
         <div className="flex items-center text-white bg-[#1b172b] p-[10px] rounded justify-between">
