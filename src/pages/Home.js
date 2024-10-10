@@ -4,10 +4,14 @@ import BottomTab from "../components/BottomTab";
 import { LuCopy } from "react-icons/lu";
 import panda1 from "../images/panda1.png";
 import toast from "react-hot-toast";
+import axios from "axios";
 
 function Home() {
   const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+  const coinBalance = JSON.parse(localStorage.getItem("coinBalance"));
   const pandaId = userInfo?.pandaId;
+  const token = JSON.parse(localStorage.getItem("token"));
+  const [loading, setLoading] = useState(false);
 
   const [timeLeft, setTimeLeft] = useState(0); // Countdown timer
   const [isFarming, setIsFarming] = useState(false); // Farming state
@@ -38,11 +42,28 @@ function Home() {
   };
 
   // Claim rewards and reset farming state
-  const claimRewards = () => {
-    setCanClaim(false);
-    setIsFarming(false);
-    localStorage.removeItem("farmingEndTime"); // Clear stored time
-    toast.success("Rewards claimed!");
+  const claimRewards = async () => {
+    try {
+      setLoading(true);
+      const { data } = await axios.post(
+        "https://panda-backend-b67c.onrender.com/api/users/claim-coins",
+        {}, // Assuming the body is empty for this request
+        {
+          headers: {
+            Authorization: `Bearer ${token}`, // Send token as Bearer token
+          },
+        }
+      );
+      localStorage.setItem("coinBalance", JSON.stringify(data));
+      setLoading(false);
+      setCanClaim(false);
+      setIsFarming(false);
+      localStorage.removeItem("farmingEndTime"); // Clear stored time
+      toast.success("Rewards claimed!");
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+    }
   };
 
   // Timer effect
@@ -94,7 +115,7 @@ function Home() {
         {/* coin Balance */}
         <div className="flex items-center justify-center p-2 mt-[38px]">
           <h1 className="text-[47px] text-purple-400 font-[700]">
-            {userInfo?.coinBalance}
+            {coinBalance?.coinBalance || coinBalance}
           </h1>
         </div>
         <div>
@@ -126,7 +147,7 @@ function Home() {
               className="h-[55px] bg-purple-700 text-gray-100 w-full rounded"
               onClick={claimRewards}
             >
-              Claim Rewards
+              {loading ? "Claiming.." : "Claim Rewards"}
             </button>
           )}
         </div>

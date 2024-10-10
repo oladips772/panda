@@ -84,6 +84,10 @@ function Loading() {
         // Store the user info in localStorage and navigate to home
         localStorage.setItem("userInfo", JSON.stringify(userInfo));
         localStorage.setItem("token", JSON.stringify(userInfo?.token));
+        localStorage.setItem(
+          "coinBalance",
+          JSON.stringify(userInfo?.coinBalance)
+        );
         navigate("/home");
       } catch (error) {
         console.log("Error handling user account:", error);
