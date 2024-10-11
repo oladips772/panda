@@ -36,9 +36,9 @@ function Home() {
 
   // Start farming, set the timer for 4 hours (14400 seconds), and store end time in localStorage
   const startFarming = () => {
-    const endTime = Date.now() + 50 * 1000; // Current time + 4 hours
+    const endTime = Date.now() + 14400 * 1000; // Current time + 4 hours
     localStorage.setItem("farmingEndTime", endTime);
-    setTimeLeft(50); // 4 hours in seconds
+    setTimeLeft(14400); // 4 hours in seconds
     setIsFarming(true);
     setCanClaim(false);
   };
