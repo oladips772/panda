@@ -1,27 +1,48 @@
 /** @format */
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 import icon from "../images/icon.png";
-import { ClockLoader } from "react-spinners";
+import { BeatLoader, ClockLoader } from "react-spinners";
+import axios from "axios";
+import toast from "react-hot-toast";
 
-function Task({ task }) {
+function Task({ task, onClaim }) {
+  const token = JSON.parse(localStorage.getItem("token"));
   const [isLoading, setIsLoading] = useState(false);
   const [showClaim, setShowClaim] = useState(false);
+  const [claiming, setClaiming] = useState(false);
 
   const handleStartTask = () => {
-    // Open the task link in a new window or appropriate app
-    window.open(task?.taskLink, "_blank"); // Opens in a new tab
-    // For React Native, use Linking:
-    // Linking.openURL(task?.taskLink).catch((err) => console.error('Failed to open URL:', err));
-
-    // Show loading animation
+    window.open(task?.taskLink, "_blank");
     setIsLoading(true);
 
-    // Simulate 12-second loading before showing "Claim" button
     setTimeout(() => {
       setIsLoading(false);
       setShowClaim(true);
-    }, 12000); // 12 seconds delay
+    }, 10000);
+  };
+
+  const handleClaimReward = async () => {
+    try {
+      setClaiming(true);
+      const { data } = await axios.post(
+        `https://panda-backend-b67c.onrender.com/api/tasks/complete/${task?._id}`,
+        {},
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      localStorage.setItem("coinBalance", JSON.stringify(data));
+      toast.success("Rewards claimed");
+      setClaiming(false);
+      onClaim(task._id);
+    } catch (error) {
+      console.error("Error claiming reward:", error);
+      setClaiming(false);
+    }
   };
 
   return (
@@ -43,14 +64,14 @@ function Task({ task }) {
           onClick={handleStartTask}
           className="p-[6px] flex items-center justify-center rounded-[20px] text-white bg-purple-800 w-[75px] text-[13.5px]"
         >
-          {isLoading ? <ClockLoader size={20} color="#fff" /> : "Start"}
+          {isLoading ? <ClockLoader size={19} color="#fff" /> : "Start"}
         </button>
       ) : (
         <button
-          className="p-[6px] flex items-center justify-center rounded-[20px] text-white bg-green-500 w-[75px] text-[13.5px]"
-          onClick={() => alert("Claiming reward")} // Replace with claim function
+          onClick={handleClaimReward}
+          className="p-[6px] flex items-center justify-center rounded-[20px] h-[35px] text-white bg-green-700 w-[75px] text-[13.5px]"
         >
-          Claim
+          {claiming ? <BeatLoader size={7} color="#fff" /> : "Claim"}
         </button>
       )}
     </div>

@@ -1,16 +1,16 @@
 /** @format */
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import BottomTab from "../components/BottomTab";
 import { LuCopy } from "react-icons/lu";
-import { useSelector, useDispatch } from "react-redux";
-import { GetTasks } from "../redux/actions/TaskAction";
 import { ScaleLoader } from "react-spinners";
 import Task from "../components/Task";
 import toast from "react-hot-toast";
+import axios from "axios";
 
 function Earn() {
-  const dispatch = useDispatch();
-  const { loading, tasks } = useSelector((state) => state.fetchTasks);
+  const token = JSON.parse(localStorage.getItem("token"));
+  const [loading, setLoading] = useState(true);
+  const [tasks, setTasks] = useState([]);
   const userInfo = JSON.parse(localStorage.getItem("userInfo"));
   const pandaId = userInfo?.pandaId;
 
@@ -22,12 +22,40 @@ function Earn() {
     }
   };
 
-  useEffect(() => {
-    if (tasks?.length) {
-      return;
+  // Function to handle task claiming
+  const handleClaimTask = async (taskId) => {
+    try {
+      setTasks((prevTasks) => prevTasks.filter((task) => task._id !== taskId));
+    } catch (error) {
+      console.error("Error claiming task:", error);
     }
-    dispatch(GetTasks());
-  }, [dispatch]);
+  };
+
+  useEffect(() => {
+    const fetchTasks = async () => {
+      if (tasks?.length) {
+        return;
+      }
+      try {
+        const { data } = await axios.get(
+          `https://panda-backend-b67c.onrender.com/api/tasks/all`,
+          {
+            headers: {
+              "Content-type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        setTasks(data);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching tasks:", error);
+        setLoading(false);
+      }
+    };
+
+    fetchTasks();
+  }, [token, tasks?.length]);
 
   return (
     <div className="">
@@ -51,15 +79,23 @@ function Earn() {
             <ScaleLoader height={25} color="#a855f7" />
           </div>
         ) : (
-          <div className="bg-[#1b172b] p-1 rounded mt-2">
-            {/* task item */}
-            {tasks?.map((task, index) => (
-              <Task task={task} key={index} />
-            ))}
-          </div>
+          <>
+            {tasks.length < 1 ? (
+              <div>
+                <p className="text-center mx-auto my-4 font-[500] text-[14px] text-gray-100">
+                  No tasks for now, check back later.
+                </p>
+              </div>
+            ) : (
+              <div className="bg-[#1b172b] p-1 rounded mt-2">
+                {tasks?.map((task) => (
+                  <Task task={task} key={task?._id} onClaim={handleClaimTask} />
+                ))}
+              </div>
+            )}
+          </>
         )}
       </div>
-
       <BottomTab />
     </div>
   );
