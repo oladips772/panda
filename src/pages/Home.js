@@ -4,11 +4,9 @@ import BottomTab from "../components/BottomTab";
 import { LuCopy } from "react-icons/lu";
 import panda1 from "../images/panda1.png";
 import icon from "../images/icon.png";
-import panda2 from "../images/panda2.png";
-import panda3 from "../images/panda3.png";
+import panda2 from "../images/icon2.png";
 import toast from "react-hot-toast";
 import axios from "axios";
-import { TbCoins } from "react-icons/tb";
 
 function Home() {
   const userInfo = JSON.parse(localStorage.getItem("userInfo"));
@@ -134,9 +132,9 @@ function Home() {
         </div>
         <div>
           <img
-            src={panda1}
+            src={panda2}
             alt="Panda"
-            className="h-[260px] mx-auto transition-all duration-500 ease-in-out panda"
+            className="h-[220px] mx-auto mt-8"
           />
         </div>
         {/* claim button */}
