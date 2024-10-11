@@ -31,9 +31,9 @@ function Earn() {
 
   return (
     <div className="">
-      <div className="p-3 h-[80vh]">
+      <div className="p-2 h-[80vh]">
         {/* top */}
-        <div className="flex items-center text-white bg-[#1b172b] p-[10px] rounded justify-between">
+        <div className="flex m-1 items-center text-white bg-[#1b172b] p-[10px] rounded justify-between">
           <h1 className="font-[600] text-[13px]">Panda User ID:</h1>
           <div className="flex items-center" onClick={copyPandaId}>
             <span className="font-[500] text-[13px]">#{userInfo?.pandaId}</span>
@@ -51,7 +51,7 @@ function Earn() {
             <ScaleLoader height={25} color="#a855f7" />
           </div>
         ) : (
-          <div className="bg-[#1b172b] p-2 rounded mt-2">
+          <div className="bg-[#1b172b] p-1 rounded mt-2">
             {/* task item */}
             {tasks?.map((task, index) => (
               <Task task={task} key={index} />

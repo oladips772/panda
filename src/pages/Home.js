@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import BottomTab from "../components/BottomTab";
 import { LuCopy } from "react-icons/lu";
 import panda1 from "../images/panda1.png";
+import icon from "../images/icon.png";
 import panda2 from "../images/panda2.png";
 import panda3 from "../images/panda3.png";
 import toast from "react-hot-toast";
@@ -112,6 +113,7 @@ function Home() {
           <h1 className="font-[600] text-[13px]">Panda User ID:</h1>
           <div className="flex items-center" onClick={copyPandaId}>
             <span className="font-[500] text-[13px]">#{userInfo?.pandaId}</span>
+
             <LuCopy className="ml-2 font-[600] text-purple-600" size={19} />
           </div>
         </div>
@@ -121,7 +123,12 @@ function Home() {
             $PTFM
           </p>
           <h1 className="text-[36px] text-purple-300 font-[700] flex flex-row items-center">
-            <TbCoins color="#d8b4fe" size={25} className="mr-[6px]" />{" "}
+            {/* <TbCoins color="#d8b4fe" size={25} className="mr-[6px]" />{" "} */}
+            <img
+              src={icon}
+              alt=""
+              className="h-[27px] w-[27px] object-contain mr-2"
+            />
             {coinBalance?.toLocaleString()}
           </h1>
         </div>
@@ -136,7 +143,7 @@ function Home() {
         <div className="flex items-center justify-center mx-2 h-[30%]">
           {!isFarming && !canClaim && (
             <button
-              className="h-[55px] bg-purple-800 font-[500] text-gray-100 w-full rounded-[28px]"
+              className="h-[53px] bg-purple-800 font-[500] text-[14.5px] text-gray-100 w-full rounded-[8px]"
               onClick={startFarming}
             >
               Start Farming
@@ -146,7 +153,7 @@ function Home() {
           {isFarming && (
             <button
               disabled
-              className="h-[55px] bg-gray-700 font-[500] text-gray-300 w-full rounded-[28px]"
+              className="h-[53px] bg-gray-700 font-[500] text-gray-300 text-[14.5px] w-full rounded-[8px]"
             >
               <p>Claim in: {formatTime(timeLeft)}</p>
             </button>
@@ -154,11 +161,22 @@ function Home() {
 
           {canClaim && !isFarming && (
             <button
-              className="h-[55px] bg-purple-800 font-[500] text-gray-200 w-full rounded-[28px]"
+              className="h-[53px] bg-purple-800 flex flex-row items-center justify-center font-[500] text-gray-200 text-[14.5px] w-full rounded-[8px]"
               onClick={claimRewards}
               disabled={loading}
             >
-              {loading ? "Claiming.." : "Claim 3,000 "}
+              {loading ? (
+                "Claiming.."
+              ) : (
+                <>
+                  Claim 3,000
+                  <img
+                    src={icon}
+                    alt=""
+                    className="h-[17px] w-[17px] object-contain ml-1 -mt-[1px]"
+                  />
+                </>
+              )}
             </button>
           )}
         </div>

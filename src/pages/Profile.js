@@ -7,6 +7,7 @@ import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { GetFriends } from "../redux/actions/TaskAction";
 import { ScaleLoader } from "react-spinners";
+import icon from "../images/icon.png";
 
 function Profile() {
   const userInfo = JSON.parse(localStorage.getItem("userInfo"));
@@ -77,20 +78,25 @@ function Profile() {
                 Your Friends
               </p>
               {frens?.map((fren, index) => (
-                <div className="mt-[18px] px-2" key={index}>
+                <div className="mt-[14px] px-[6px]" key={index}>
                   {/* frens item */}
-                  <div className="flex items-center my-[12px]">
-                    <div className="flex items-center justify-center h-[35px] w-[35px] bg-purple-700 rounded-full mx-1">
-                      <p className="text-gray-200 font-[600] text-[18px]">
+                  <div className="flex items-center my-[6px]">
+                    <div className="flex items-center justify-center h-[33px] w-[33px] bg-purple-700 rounded-full mx-1">
+                      <p className="text-gray-200 font-[600] text-[16px]">
                         {fren?.name?.slice(0, 1)}
                       </p>
                     </div>
-                    <span className="text-gray-200 ml-2 text-[16px] flex-1">
+                    <span className="text-gray-200 ml-2 text-[15px] flex-1">
                       {fren?.name}
                     </span>
                     <span className="text-gray-200 text-[12px] font-[600]">
                       +1,000
                     </span>
+                    <img
+                      src={icon}
+                      alt=""
+                      className="h-[15px] w-[15px] object-contain mx-1"
+                    />
                   </div>
                 </div>
               ))}
