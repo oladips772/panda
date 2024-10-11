@@ -32,10 +32,10 @@ function Earn() {
   };
 
   useEffect(() => {
+    if (tasks?.length >= 1) {
+      return;
+    }
     const fetchTasks = async () => {
-      if (tasks?.length) {
-        return;
-      }
       try {
         const { data } = await axios.get(
           `https://panda-backend-b67c.onrender.com/api/tasks/all`,

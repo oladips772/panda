@@ -31,7 +31,7 @@ function BottomTab() {
         }}
         className={"flex flex-col items-center space-y-1 relative"}
       >
-        <span className="h-[7px] w-[7px] rounded-full bg-pink-600 -right-2 absolute"></span>
+        <span className="h-[7px] w-[7px] rounded-full bg-red-600 -right-2 absolute"></span>
         <FaCoins size={20} className="-mb-2" />
         <p className="text-[12px]">Earn</p>
       </NavLink>

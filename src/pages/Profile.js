@@ -87,7 +87,7 @@ function Profile() {
                       </p>
                     </div>
                     <span className="text-gray-200 ml-2 text-[15px] flex-1">
-                      {fren?.name}
+                      {fren?.name?.slice(0, 23)}
                     </span>
                     <span className="text-gray-200 text-[12px] font-[600]">
                       +1,000
