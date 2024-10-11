@@ -112,7 +112,7 @@ function Home() {
           <div className="flex items-center" onClick={copyPandaId}>
             <span className="font-[500] text-[13px]">#{userInfo?.pandaId}</span>
 
-            <LuCopy className="ml-2 font-[600] text-purple-600" size={19} />
+            <LuCopy className="ml-2 font-[600] text-purple-500" size={19} />
           </div>
         </div>
         {/* coin Balance */}
@@ -121,21 +121,16 @@ function Home() {
             $PTFM
           </p>
           <h1 className="text-[36px] text-purple-300 font-[700] flex flex-row items-center">
-            {/* <TbCoins color="#d8b4fe" size={25} className="mr-[6px]" />{" "} */}
             <img
               src={icon}
               alt=""
-              className="h-[27px] w-[27px] object-contain mr-2"
+              className="h-[27px] w-[27px] object-contain mr-[6px]"
             />
             {coinBalance?.toLocaleString()}
           </h1>
         </div>
         <div>
-          <img
-            src={panda2}
-            alt="Panda"
-            className="h-[220px] mx-auto mt-8"
-          />
+          <img src={panda2} alt="Panda" className="h-[220px] mx-auto mt-8" />
         </div>
         {/* claim button */}
         <div className="flex items-center justify-center mx-2 h-[30%]">

@@ -37,7 +37,7 @@ function Earn() {
           <h1 className="font-[600] text-[13px]">Panda User ID:</h1>
           <div className="flex items-center" onClick={copyPandaId}>
             <span className="font-[500] text-[13px]">#{userInfo?.pandaId}</span>
-            <LuCopy className="ml-2 font-[600] text-purple-600" size={19} />
+            <LuCopy className="ml-2 font-[600] text-purple-500" size={19} />
           </div>
         </div>
         {/* header */}
