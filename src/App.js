@@ -12,7 +12,14 @@ import { Toaster } from "react-hot-toast";
 function App() {
   return (
     <div className="App">
-      <Toaster />
+      <Toaster
+        toastOptions={{
+          style: {
+            backgroundColor: "#0e0c16",
+            color: "white",
+          },
+        }}
+      />
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Loading />} />
