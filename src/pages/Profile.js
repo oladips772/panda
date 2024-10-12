@@ -114,13 +114,13 @@ function Profile() {
       {/* frens */}
 
       {/* referral button */}
-      <div className="p-3">
+      <div className="p-4">
         <button
           onClick={copyToClipboard}
-          className="mt-8 text-gray-200 flex flex-row items-center justify-center bg-purple-800 rounded p-3 w-full"
+          className="mt-8 text-gray-200 flex flex-row items-center justify-center bg-purple-800 rounded text-[13px] font-[500] p-[11px] w-full"
         >
           Copy Referral Link
-          <LuCopy className="ml-2 font-[600] text-gray-200" size={19} />
+          <LuCopy className="ml-2 text-gray-200" size={17} />
         </button>
         <p className="text-gray-300 mt-1 text-[12px]">
           Invite a friend to earn 1,000 panda tokens

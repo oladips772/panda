@@ -18,7 +18,7 @@ function Task({ task, onClaim }) {
     setTimeout(() => {
       setIsLoading(false);
       setShowClaim(true);
-    }, 10000);
+    }, 12000);
   };
 
   const handleClaimReward = async () => {
@@ -62,14 +62,14 @@ function Task({ task, onClaim }) {
       {!showClaim ? (
         <button
           onClick={handleStartTask}
-          className="p-[6px] flex items-center justify-center rounded-[20px] text-white bg-purple-800 w-[75px] text-[13.5px]"
+          className="p-[6px] flex items-center justify-center h-[35px] rounded-[20px] text-white bg-purple-700 w-[75px] text-[13.5px]"
         >
-          {isLoading ? <ClockLoader size={19} color="#fff" /> : "Start"}
+          {isLoading ? <ClockLoader size={16} color="#fff" /> : "Start"}
         </button>
       ) : (
         <button
           onClick={handleClaimReward}
-          className="p-[6px] flex items-center justify-center rounded-[20px] h-[35px] text-white bg-green-700 w-[75px] text-[13.5px]"
+          className="p-[6px] flex items-center justify-center rounded-[20px] h-[35px] text-white bg-pink-700 w-[75px] text-[13.5px]"
         >
           {claiming ? <BeatLoader size={7} color="#fff" /> : "Claim"}
         </button>
