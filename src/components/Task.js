@@ -13,8 +13,7 @@ function Task({ task, onClaim }) {
   const mediaUrl =
     "https://res.cloudinary.com/dsbhrtd0o/image/upload/v1728995449/Frame_1_5_vghoi3.png";
   const params = {
-    caption:
-      "Earned 10,000 panda tokens!  Join me on @Panda_tokenfarmbot to get yours. #pandatokenfarm",
+    text: "Earned 10,000 panda tokens!  Join me on @Panda_tokenfarmbot to get yours. #pandatokenfarm",
   };
 
   const handleStartTask = () => {
