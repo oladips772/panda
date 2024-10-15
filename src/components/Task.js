@@ -10,9 +10,20 @@ function Task({ task, onClaim }) {
   const [isLoading, setIsLoading] = useState(false);
   const [showClaim, setShowClaim] = useState(false);
   const [claiming, setClaiming] = useState(false);
+  const mediaUrl =
+    "https://res.cloudinary.com/dsbhrtd0o/image/upload/v1728995449/Frame_1_5_vghoi3.png";
+  const params = {
+    caption:
+      "Earned 10,000 panda tokens!  Join me on @Panda_tokenfarmbot to get yours. #pandatokenfarm",
+  };
 
   const handleStartTask = () => {
-    window.open(task?.taskLink, "_blank");
+    if (task?.description === "share story") {
+      window.Telegram.WebApp.shareToStory(mediaUrl, params);
+    } else {
+      window.open(task?.taskLink, "_blank");
+    }
+
     setIsLoading(true);
 
     setTimeout(() => {
