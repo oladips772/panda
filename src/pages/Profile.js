@@ -71,9 +71,9 @@ function Profile() {
           <ScaleLoader height={25} color="#a855f7" />
         </div>
       ) : (
-        <>
+        <div className="">
           {frens?.length >= 1 ? (
-            <>
+            <div className="">
               <p className="text-[16px] text-gray-200 mt-4 mx-[10px]">
                 Your Friends
               </p>
@@ -102,7 +102,7 @@ function Profile() {
                   </div>
                 </>
               ))}
-            </>
+            </div>
           ) : (
             <div>
               <h1 className="text-gray-200 text-[16px] text-center my-6">
@@ -110,7 +110,7 @@ function Profile() {
               </h1>
             </div>
           )}
-        </>
+        </div>
       )}
 
       {/* referral button */}
