@@ -41,8 +41,8 @@ function Profile() {
   };
 
   return (
-    <div>
-      <div className="p-3 h-[100%]">
+    <div className="relative h-[100vh]">
+      <div className="p-3">
         {/* top */}
         <div className="flex items-center text-white bg-[#1b172b] p-[10px] rounded justify-between">
           <h1 className="font-[600] text-[13px]">Panda User ID:</h1>
@@ -78,27 +78,71 @@ function Profile() {
                 Your Friends
               </p>
               {frens?.map((fren, index) => (
-                <div className="mt-[14px] px-[6px]" key={index}>
-                  {/* frens item */}
-                  <div className="flex items-center my-[6px]">
-                    <div className="flex items-center justify-center h-[33px] w-[33px] bg-purple-700 rounded-full mx-1">
-                      <p className="text-gray-200 font-[600] text-[16px]">
-                        {fren?.name?.slice(0, 1)}
-                      </p>
+                <>
+                  <div className="mt-[14px] px-[6px]" key={index}>
+                    {/* frens item */}
+                    <div className="flex items-center my-[6px]">
+                      <div className="flex items-center justify-center h-[33px] w-[33px] bg-purple-700 rounded-full mx-1">
+                        <p className="text-gray-200 font-[600] text-[16px]">
+                          {fren?.name?.slice(0, 1)}
+                        </p>
+                      </div>
+                      <span className="text-gray-200 ml-2 text-[15px] flex-1">
+                        {fren?.name?.slice(0, 23)}
+                      </span>
+                      <span className="text-gray-200 text-[12px] font-[600]">
+                        +1,000
+                      </span>
+                      <img
+                        src={icon}
+                        alt=""
+                        className="h-[15px] w-[15px] object-contain mx-1"
+                      />
                     </div>
-                    <span className="text-gray-200 ml-2 text-[15px] flex-1">
-                      {fren?.name?.slice(0, 23)}
-                    </span>
-                    <span className="text-gray-200 text-[12px] font-[600]">
-                      +1,000
-                    </span>
-                    <img
-                      src={icon}
-                      alt=""
-                      className="h-[15px] w-[15px] object-contain mx-1"
-                    />
                   </div>
-                </div>
+                  <div className="mt-[14px] px-[6px]" key={index}>
+                    {/* frens item */}
+                    <div className="flex items-center my-[6px]">
+                      <div className="flex items-center justify-center h-[33px] w-[33px] bg-purple-700 rounded-full mx-1">
+                        <p className="text-gray-200 font-[600] text-[16px]">
+                          {fren?.name?.slice(0, 1)}
+                        </p>
+                      </div>
+                      <span className="text-gray-200 ml-2 text-[15px] flex-1">
+                        {fren?.name?.slice(0, 23)}
+                      </span>
+                      <span className="text-gray-200 text-[12px] font-[600]">
+                        +1,000
+                      </span>
+                      <img
+                        src={icon}
+                        alt=""
+                        className="h-[15px] w-[15px] object-contain mx-1"
+                      />
+                    </div>
+                  </div>{" "}
+                  <div className="mt-[14px] px-[6px]" key={index}>
+                    {/* frens item */}
+                    <div className="flex items-center my-[6px]">
+                      <div className="flex items-center justify-center h-[33px] w-[33px] bg-purple-700 rounded-full mx-1">
+                        <p className="text-gray-200 font-[600] text-[16px]">
+                          {fren?.name?.slice(0, 1)}
+                        </p>
+                      </div>
+                      <span className="text-gray-200 ml-2 text-[15px] flex-1">
+                        {fren?.name?.slice(0, 23)}
+                      </span>
+                      <span className="text-gray-200 text-[12px] font-[600]">
+                        +1,000
+                      </span>
+                      <img
+                        src={icon}
+                        alt=""
+                        className="h-[15px] w-[15px] object-contain mx-1"
+                      />
+                    </div>
+                  </div>
+                </>
               ))}
             </>
           ) : (
@@ -111,10 +155,8 @@ function Profile() {
         </>
       )}
 
-      {/* frens */}
-
       {/* referral button */}
-      <div className="p-4">
+      <div className="p-4 fixed left-0 right-0 bottom-[60px]">
         <button
           onClick={copyToClipboard}
           className="mt-8 text-gray-200 flex flex-row items-center justify-center bg-purple-800 rounded text-[13px] font-[500] p-[11px] w-full"
