@@ -100,48 +100,6 @@ function Profile() {
                       />
                     </div>
                   </div>
-                  <div className="mt-[14px] px-[6px]" key={index}>
-                    {/* frens item */}
-                    <div className="flex items-center my-[6px]">
-                      <div className="flex items-center justify-center h-[33px] w-[33px] bg-purple-700 rounded-full mx-1">
-                        <p className="text-gray-200 font-[600] text-[16px]">
-                          {fren?.name?.slice(0, 1)}
-                        </p>
-                      </div>
-                      <span className="text-gray-200 ml-2 text-[15px] flex-1">
-                        {fren?.name?.slice(0, 23)}
-                      </span>
-                      <span className="text-gray-200 text-[12px] font-[600]">
-                        +1,000
-                      </span>
-                      <img
-                        src={icon}
-                        alt=""
-                        className="h-[15px] w-[15px] object-contain mx-1"
-                      />
-                    </div>
-                  </div>{" "}
-                  <div className="mt-[14px] px-[6px]" key={index}>
-                    {/* frens item */}
-                    <div className="flex items-center my-[6px]">
-                      <div className="flex items-center justify-center h-[33px] w-[33px] bg-purple-700 rounded-full mx-1">
-                        <p className="text-gray-200 font-[600] text-[16px]">
-                          {fren?.name?.slice(0, 1)}
-                        </p>
-                      </div>
-                      <span className="text-gray-200 ml-2 text-[15px] flex-1">
-                        {fren?.name?.slice(0, 23)}
-                      </span>
-                      <span className="text-gray-200 text-[12px] font-[600]">
-                        +1,000
-                      </span>
-                      <img
-                        src={icon}
-                        alt=""
-                        className="h-[15px] w-[15px] object-contain mx-1"
-                      />
-                    </div>
-                  </div>
                 </>
               ))}
             </>
