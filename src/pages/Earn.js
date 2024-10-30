@@ -38,7 +38,7 @@ function Earn() {
     const fetchTasks = async () => {
       try {
         const { data } = await axios.get(
-          `https://panda-backend-b67c.onrender.com/api/tasks/all`,
+          `https://panda-backend-rose.vercel.app/api/tasks/all`,
           {
             headers: {
               "Content-type": "application/json",

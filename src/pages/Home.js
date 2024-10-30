@@ -48,7 +48,7 @@ function Home() {
     try {
       setLoading(true);
       const { data } = await axios.post(
-        "https://panda-backend-b67c.onrender.com/api/users/claim-coins",
+        "https://panda-backend-rose.vercel.app/api/users/claim-coins",
         {}, // Assuming the body is empty for this request
         {
           headers: {

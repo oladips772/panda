@@ -1,2 +1,2 @@
 /** @format */
-export const URI = "https://panda-backend-b67c.onrender.com";
+export const URI = "https://panda-backend-rose.vercel.app";

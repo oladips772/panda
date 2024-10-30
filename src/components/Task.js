@@ -35,7 +35,7 @@ function Task({ task, onClaim }) {
     try {
       setClaiming(true);
       const { data } = await axios.post(
-        `https://panda-backend-b67c.onrender.com/api/tasks/complete/${task?._id}`,
+        `https://panda-backend-rose.vercel.app/api/tasks/complete/${task?._id}`,
         {},
         {
           method: "POST",

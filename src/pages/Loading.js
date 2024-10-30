@@ -69,7 +69,7 @@ function Loading() {
       try {
         // Send user data and referral code to the backend
         const response = await axios.post(
-          "https://panda-backend-b67c.onrender.com/api/users/check-or-create",
+          "https://panda-backend-rose.vercel.app/api/users/check-or-create",
           {
             userId: userData?.id,
             firstName: userData?.first_name,
